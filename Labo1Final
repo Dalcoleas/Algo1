@@ -1,0 +1,98 @@
+/*EJERCICIO 1*/
+
+#include <iostream>
+
+using namespace std;
+
+void sumarMatrices(int a[3][3], int b[3][3], int c[3][3], int filas, int columnas){
+    if( filas == 0 and columnas == 0)
+        c[filas][columnas] = a[filas][columnas] + b[filas][columnas];
+
+    else if (filas == 0){
+        c[filas][columnas] = a[filas][columnas] + b[filas][columnas];
+        sumarMatrices(a,b,c,3,columnas-1);
+    }
+
+    else{
+        c[filas][columnas] = a[filas][columnas] + b[filas][columnas];
+        sumarMatrices(a,b,c,filas - 1,columnas);
+    }
+}
+
+int main(){
+
+    int A[3][3] = {{7,5,5}, {5,7,5}, {5,5,7}};
+    int B[3][3] = {{5,5,5}, {5,5,5}, {5,5,5}};
+    int C[3][3];
+
+    sumarMatrices(A,B,C,3,3);
+    for(int i = 0;i < 3; i++){
+        for (int j = 0 ; j < 3 ; j++){
+            cout << C[i][j]<< " ";
+        }
+        cout << " " << endl;
+    }
+
+    return 0;
+}
+
+-------------------------------------------------------------------------------------------------
+
+/*EJERCICIO 2*/
+
+#include <iostream>
+
+using namespace std;
+
+/*Por Cola*/
+
+int totalito(int x, int n, int val){
+    if(n == 0)
+        return val;
+    else
+        return totalito(x, n-1, val * x);
+}
+
+int total(int x, int n){
+    return totalito (x,n,1);
+}
+
+int main(){
+    int x,n;
+    cout << "Ingrese valor x: ";
+    cin >> x;
+    cout << "Ingrese valor n: ";
+    cin >> n;
+
+    cout << x << "^" << n << "="  << total(x,n)<< " -> Cola"<<endl;
+    return 0;
+}
+
+-------------------------------------------------------------------------------------------------
+
+/*EJERCICIO 3*/
+
+#include <iostream>
+
+using namespace std;
+
+int minimo(int a[], int n){
+    if(n == 1)
+        return a[0];
+    if (a[n-1] < minimo(a, n-1)){
+        return a[n-1];
+    }
+    else{
+        return minimo(a,n-1);
+    }
+}
+
+int main(){
+    int n;
+    int A[10] = {70,20,30,15,67,3,5,2,99,43};
+    int size = sizeof(A)/sizeof(A[0]);
+    cout << "Valor Minimo: " << minimo(A,size) << endl;
+    
+    return 0;
+}
+
